@@ -1,0 +1,32 @@
+name: Update Tesouro Direto CSV
+
+on:
+  schedule:
+    - cron: "0 12 * * 1-5" # Executa às 12:00 UTC de segunda a sexta
+  workflow_dispatch: # Permite execução manual
+
+jobs:
+  update-csv:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas requests
+
+      - name: Run CSV processing script
+        run: python filtrar_tesouro_direto.py
+
+      - name: Commit and push if changed
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'actions@github.com'
+          git add tesouro_direto_filtrado.csv
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Atualizar dados do Tesouro Direto" && git push)
