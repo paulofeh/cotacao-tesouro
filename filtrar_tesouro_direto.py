@@ -23,7 +23,7 @@ def process_csv():
         ('Tesouro Selic', '01/03/2026'),
         ('Tesouro Selic', '01/03/2027'),
         ('Tesouro IPCA+', '15/05/2035'),
-        ('Tesouro Prefixado', '01/01/2027'),
+        ('Tesouro IPCA+', '15/05/2029'),
         ('Tesouro Prefixado', '01/01/2029'),
         # Adicione outros títulos e datas de vencimento conforme necessário
     ]
